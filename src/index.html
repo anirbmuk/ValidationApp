@@ -25,7 +25,7 @@
   ***************************** IMPORTANT INFORMATION ************************************ -->
 <html lang="en-us">
     <head>
-        <title>Oracle JET Starter Template - Web Basic</title>
+        <title>Oracle JET Validation</title>
 
         <meta charset="UTF-8">
         <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1">
@@ -88,36 +88,43 @@
                     <div data-bind="foreach: components">
                         <oj-button on-oj-action="[[$data.clickAction]]" data-bind="attr: {id: $data.id}, css: $data.cssClass"><span data-bind="text: $data.label"></span></oj-button>
                     </div>
-                    </script>
-                    <script type="text/html" id="core-group-template">
-                        <h1 data-bind="text: header"></h1>
-                        <div class="oj-form-layout">
-                            <div class="oj-form" data-bind="foreach: groups">
-                                <oj-bind-if test="[[$data.visible]]">
-                                    <oj-label for="[[$data.id]]" show-required="[[$data.isRequired]]"><span data-bind="text: $data.label"></span></oj-label>
-                                    <input data-bind="ojComponent: {component: $data.component, value: $data.inputValue, validators: $data.validators, required: $data.isRequired}, attr: {id: $data.id}"></input>
+                </script>
+                <script type="text/html" id="core-group-template">
+                    <h1 data-bind="text: header"></h1>
+                    <div class="oj-form-layout">
+                        <div class="oj-form" data-bind="foreach: groups">
+                            <oj-bind-if test="[[$data.visible]]">
+                                <oj-label for="[[$data.id]]" show-required="[[$data.isRequired]]"><span data-bind="text: $data.label"></span></oj-label>
+                                <input data-bind="ojComponent: {component: $data.component, value: $data.inputValue, validators: $data.validators, required: $data.isRequired}, 
+                                        attr: {id: $data.id}"></input>
+                            </oj-bind-if>
+                        </div>
+                    </div>
+                </script>
+                <script type="text/html" id="named-group-template">
+                    <h1 data-bind="text: header"></h1>
+                    <div class="oj-form-layout">
+                        <div class="oj-form" data-bind="foreach: groups">
+                            <oj-bind-if test="[[$data.visible]]">
+                                <oj-bind-if test="$data.component === 'ojInputText'">
+                                    <oj-label for="[[$data.id]]" show-required="[[$data.isRequired]]">
+                                        <span data-bind="text: $data.label"></span>
+                                    </oj-label>
+                                    <oj-input-text data-bind="attr: {id: $data.id, required: $data.isRequired}" 
+                                                   value="{{$data.inputValue}}" validators="[[$data.validators]]"></oj-input-text>
                                 </oj-bind-if>
-                            </div>
+                                <oj-bind-if test="$data.component === 'ojInputDate'">
+                                    <oj-label for="[[$data.id]]" show-required="[[$data.isRequired]]">
+                                        <span data-bind="text: $data.label"></span>
+                                    </oj-label>
+                                    <oj-input-date data-bind="attr: {id: $data.id, required: $data.isRequired}" 
+                                                   value="{{$data.inputValue}}" validators="[[$data.validators]]"></oj-input-date>
+                                </oj-bind-if>
+                            </oj-bind-if>
                         </div>
-                        </script>
-                        <script type="text/html" id="named-group-template">
-                            <h1 data-bind="text: header"></h1>
-                            <div class="oj-form-layout">
-                                <div class="oj-form" data-bind="foreach: groups">
-                                    <oj-bind-if test="[[$data.visible]]">
-                                        <oj-bind-if test="$data.component === 'ojInputText'">
-                                            <oj-label for="[[$data.id]]" show-required="[[$data.isRequired]]"><span data-bind="text: $data.label"></span></oj-label>
-                                            <oj-input-text data-bind="attr: {id: $data.id, required: $data.isRequired}" value="{{$data.inputValue}}" validators="[[$data.validators]]"></oj-input-text>
-                                        </oj-bind-if>
-                                        <oj-bind-if test="$data.component === 'ojInputDate'">
-                                            <oj-label for="[[$data.id]]" show-required="[[$data.isRequired]]"><span data-bind="text: $data.label"></span></oj-label>
-                                            <oj-input-date data-bind="attr: {id: $data.id, required: $data.isRequired}" value="{{$data.inputValue}}" validators="[[$data.validators]]"></oj-input-date>
-                                        </oj-bind-if>
-                                    </oj-bind-if>
-                                </div>
-                            </div>
-                            </script>
-                        </div>
+                    </div>
+                </script>
+                </div>
                         <footer class="oj-web-applayout-footer" role="contentinfo">
                             <div class="oj-web-applayout-footer-item oj-web-applayout-max-width oj-text-secondary-color oj-text-sm">
                                 Copyright © 2014, 2018 Oracle and/or its affiliates All rights reserved.

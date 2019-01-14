@@ -59,20 +59,20 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojlabel',
                 self.coreValidateFn = function () {
                     const items = self.coreGroupTemplate.value.groups;
                     let allValid = true;
-                    items.some(component => {
-                        const str = $(`#${component.id}`);
+                    items.some(item => {
+                        const str = $(`#${item.id}`);
                         const uic = str[0];
                         if (uic) {
                             const tagName = uic.tagName;
                             if (!tagName.startsWith('OJ-')) {
-                                if (component.component === 'ojInputText') {
+                                if (item.component === 'ojInputText') {
                                     if (!(str).ojInputText("option", "value")) {
                                         (str).ojInputText("showMessages");
                                     } else {
                                         (str).ojInputText("validate");
                                     }
                                     allValid = str.ojInputText("isValid");
-                                } else if (component.component === 'ojInputDate') {
+                                } else if (item.component === 'ojInputDate') {
                                     if (!(str).ojInputDate("option", "value")) {
                                         (str).ojInputDate("showMessages");
                                     } else {
@@ -106,20 +106,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojknockout', 'ojs/ojlabel',
                                     uic.focus();
                                 } else {
                                     uic.validate();
-                                }
-                            } else {
-                                if (component.component === 'ojInputText') {
-                                    if (!(str).ojInputText("option", "value")) {
-                                        (str).ojInputText("showMessages");
-                                    } else {
-                                        (str).ojInputText("validate");
-                                    }
-                                } else if (component.component === 'ojInputDate') {
-                                    if (!(str).ojInputDate("option", "value")) {
-                                        (str).ojInputDate("showMessages");
-                                    } else {
-                                        (str).ojInputDate("validate");
-                                    }
                                 }
                             }
                             if (uic.valid !== 'valid') {
